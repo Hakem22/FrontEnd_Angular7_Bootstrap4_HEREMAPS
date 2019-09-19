@@ -1,0 +1,204 @@
+<div id="page-content">
+      <div class="row">  
+                 <div class="col-sm-12"> 
+                         <div class="card bg-dark text-white">  
+                                 <div class="card-header">
+                                        <h3 *ngIf="!selectedAlert" class= "text-center font-weight-bold text-uppercase py-4"> METEO IN YOUR LOCATION <i class="fa fa-map-marker"></i> </h3>   
+                                        <h3 *ngIf="selectedAlert" class= "text-center font-weight-bold text-uppercase py-4"> METEO IN SELECTED ALERT <i class="fa fa-map-marker"></i> </h3>   
+                                 </div>
+                                 <div class="card-body">
+                                        <p *ngIf="weather.length == 0">Searching...</p>
+                                        <div *ngIf="weather.length > 0">
+                                                <table style="width: 100%; text-align: center">
+                                                        <thead></thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td *ngFor="let forecast of weather">
+                                                                                <img [src]="forecast.iconLink" />
+                                                                                <p class="font-weight-bold">{{ forecast.highTemperature}}<i class="wi wi-thermometer"></i></p>
+                                                                                <p class="font-weight-bold">{{ forecast.lowTemperature}}<i class="wi wi-thermometer-exterior"></i></p>
+                                                                                <p class="font-weight-bold">{{ forecast.humidity}}<i class="wi wi-humidity"></i></p>
+                                                                                <p class="font-weight-bold">{{ forecast.windSpeed}}<i class="wi wi-strong-wind"></i></p>
+                                                                        </td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+                                        </div>
+
+                                 </div>
+                
+                        </div>
+                </div>
+        </div>
+
+
+
+        <div class="row" >
+                <!--Map visualisation-->
+                <div class="col-sm-12">
+                        <div class="card">
+                                <div class="card-header">
+                                        <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search for Address ..." [(ngModel)]="query">
+                                                        <div class="input-group-btn">
+                                                                <button class="btn btn-info btn-md" type="button" (click)="geocodeAdr(query)">Search</button>
+                                                        </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                        <label class=" col-form-label" for="select1" >Select Sensor Type</label>
+                                                        <select class="form-control" (change)="selectedSensors($event)" >
+                                                                <option>NONE</option>
+                                                                <option>WATER_LEVEL</option>
+                                                                <option>FOREST_FIRE</option>
+                                                                <option>ALL</option>
+                                                                          
+                                                        </select>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                                <label class=" col-form-label" for="select1">Select Unit Intervention Type</label>
+                                                                <select class="form-control" (change)="selectedUnits($event)" >
+                                                                        <option>NONE</option>
+                                                                        <option>HOSPITALITY</option>
+                                                                        <option>CIVIL_PROTECTION</option>
+                                                                        <option>POLICE_DIRECTION</option>
+                                                                        <option>GENDARMERIE</option>
+                                                                        <option>ALL</option>
+                                                                                  
+                                                                </select>
+                                                </div>
+
+                                        </div>
+                                                   
+                                </div>
+                                <div class="card-body">
+                                        <div #map  [style.height]="height" style="width: 100%;"></div>
+                                </div>
+                        </div>
+                </div>
+
+
+                <!--List of comming Alert-->
+
+        </div>
+
+        <div class="row">
+                <div class="col-sm-12">
+                        <!--Citizen Alert-->
+                        <div class="col-sm-6 float-right">
+                                <h3 class= "text-center font-weight-bold text-uppercase py-4">COMIING CITIZEN ALERTS</h3>
+                                <div *ngFor="let alert of alertsCitizen, let id=index">
+                                        <div  class="card float-right col-sm-12" style="margin-bottom: 10px" >
+                                                  <div class="card-header">
+                                                      <h5 class= "text-center font-weight-bold text-uppercase">{{alert.alertType}}</h5>
+                                                  </div>    
+                                            
+                                                  <div class="card-body">
+                                                    <dl class="row col-sm-12">
+                                                      <!--phone-->
+                                                      <dt class="col-sm-1"><i class="fa fa-mobile"></i></dt>
+                                                      <dd class="col-sm-3">{{alert.citizen.phoneNumber}}</dd>
+                                                      <!--name-->
+                                                      <dt class="col-sm-1"><i class="fa fa-user"></i></dt>
+                                                      <dd class="col-sm-3"><p class="text-uppercase">{{alert.citizen.fastName}} {{alert.citizen.firstName}}</p></dd>
+                                            
+                                                      <!--button Valid-->
+                                                      <dt class="col-sm-4">        
+                                                         <button class="btn btn-block btn-success" (click)=" validateC(alert.id)">VALID ALERT</button>
+                                                        </dt>
+
+                                                      <!--button get alerts-->
+                                                      <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                                                      <dd class="col-sm-3"> al: {{alert.altitude}} </dd>
+
+                                                      <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                                                      <dd class="col-sm-3"> lg: {{alert.longitude}} </dd>
+                                                      
+                                                      <!--button nearest unist-->
+                                                       <dd class="col-sm-4">         
+                                                                <button class="btn btn-primary btn-block mx-auto " (click)=" nearestUnits(alert.altitude, alert.longitude)">GET NEAREST UNITS</button>
+                                                        </dd>
+
+                                                      <!--time-->
+                                                      <dt class="col-sm-1"><i class="fa fa-clock-o"></i></dt>
+                                                      <dd class="col-sm-3"><p>{{alert.timeSend}}</p></dd>
+
+                                                      <!--date-->
+                                                      <dt class="col-sm-1"><i class="fa fa-calendar"></i></dt>
+                                                      <dd class="col-sm-3"><p>{{alert.dateSend}}</p></dd>
+                                            
+                                                      <!--button invalid-->
+                                                      <dt class="col-sm-4">         
+                                                                <button class="btn btn-danger btn-block " (click)=" invalidateC(alert.id)">INVALID ALERT</button>
+                                                        </dt>
+                                                      <!--Description-->
+                                                      <dt class="col-sm-1"><i class="fa fa-newspaper-o"></i></dt>
+                                                      <dd class="col-sm-11"><p>"{{alert.description}}"</p></dd>
+      
+                                                </dl> 
+                                                
+                                               
+                                                        <div class="row"><img [src]="alert.uri" class="img-thumbnail" alt="Responsive image"></div>      
+                                                
+                                                </div>      
+                                        </div>
+                                </div>
+                        </div>
+                        <!--Sensor Alert-->
+                        <div class="col-sm-6 float-right">
+                                <h3 class= "text-center font-weight-bold text-uppercase py-4">COMMING SENSOR ALERT</h3>
+                                <div *ngFor="let alert of alertsSensor, let id=index">
+                                        <div  class="card float-right col-sm-12" style="margin-bottom: 10px" >
+                                                  <div class="card-header">
+                                                      <h5 class= "text-center font-weight-bold text-uppercase">{{alert.sensor.type}}</h5>
+                                                  </div>    
+                                            
+                                                  <div class="card-body">
+                                                    <dl class="row col-sm-12">
+                                                      <!--phone-->
+                                                      <dt class="col-sm-1"><i class="fa fa-rss"></i></dt>
+                                                      <dd class="col-sm-3">{{alert.sensor.reference}}</dd>
+                                                      <!--name-->
+                                                      <dt class="col-sm-1"><i class="fa fa-battery-3"></i></dt>
+                                                      <dd class="col-sm-3"><p class="text-uppercase">{{alert.sensor.state}}</p></dd>
+                                            
+                                                      <!--button Valid-->
+                                                        <dt class="col-sm-4">        
+                                                        <button class="btn btn-block btn-success" (click)=" validateS(alert.id)">VALID ALERT</button>
+                                                        </dt>
+
+                                                        <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                                                        <dd class="col-sm-3"> al: {{alert.sensor.altitude}} </dd>
+
+                                                        <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                                                        <dd class="col-sm-3"> lg: {{alert.sensor.longitude}} </dd>
+                                                      
+                                                         <!--button nearest unist-->
+                                                       <dd class="col-sm-4">         
+                                                        <button class="btn btn-primary btn-block mx-auto " (click)=" nearestUnits(alert.altitude, alert.longitude)">GET NEAREST UNITS</button>
+                                                        </dd>
+
+                                                      
+                                                      <!--time-->
+                                                      <dt class="col-sm-1"><i class="fa fa-clock-o"></i></dt>
+                                                      <dd class="col-sm-3"><p>{{alert.timeSend}}</p></dd>
+                                                      <!--date-->
+                                                      <dt class="col-sm-1"><i class="fa fa-calendar"></i></dt>
+                                                      <dd class="col-sm-3"><p>{{alert.dateSend}}</p></dd>
+                                                      <!--button invalid-->
+                                                      <dt class="col-sm-4">         
+                                                         <button class="btn btn-danger btn-block " (click)=" invalidateS(alert.id)">INVALID ALERT</button>
+                                                      </dt>
+                                            
+                                                      <!--Description-->
+                                                      <dt class="col-sm-1"><i class="fa fa-bar-chart"></i></dt>
+                                                      <dd class="col-sm-7"><p class="font-weight-bold">"{{alert.value}}"</p></dd>
+                                                      
+                                                    </dl>
+                                                  </div>      
+                                        </div>
+                                </div>        
+                        </div>
+                </div>
+        </div>
+</div>

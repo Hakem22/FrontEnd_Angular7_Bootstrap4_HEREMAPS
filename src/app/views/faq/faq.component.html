@@ -1,0 +1,117 @@
+<div id="page-content">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <div class="input-group-btn">
+                            <button class="btn btn-info btn-md" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- GENERAL -->
+                    <!--===================================================-->
+                    <h3 class="pad-all bord-btm text-thin">General</h3>
+
+                   <!--Question1-->
+                    <div class="text-semibold pad-hor text-lg">
+                        <button type="button" class="btn btn-link px-0" (click)="isCollapsed[1] = !isCollapsed[1]" > <i class="fa fa-bullhorn"></i>  Can I download the reports as a PDF</button>
+                        <p class="media-heading"> <small>  Added by Imen HAKEM <i class="fa fa-clock-o"></i>    Today 2:40 pm - 24.03.2019</small> </p>
+                    </div>
+                    <div class="panel panel-trans pad-top " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed[1]">
+                        <div class="pad-all">
+                                Reports from dashboard can be printed to PDF using Google Chrome. With other browsers if you have PDF creation tools such as Acrobat you can generate the PDF reports directly.
+                        </div>
+                    </div>
+
+
+                    <!--Question2-->
+                    <div class="text-semibold pad-hor text-lg">
+                            <button type="button" class="btn btn-link px-0" (click)="isCollapsed[2] = !isCollapsed[2]" > <i class="fa fa-bullhorn"></i> Can I choose to set up default settings differently for the supported applications?</button>
+                            <p class="media-heading"> <small>  Added by Imen HAKEM <i class="fa fa-clock-o"></i>    Today 2:40 pm - 24.03.2019</small> </p>
+                    </div>
+                    <div class="panel panel-trans pad-top " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed[2]">
+                        <div class="pad-all">
+                                Currently, the settings made on the dashboard are reflected on all the applications. However, you can personlize your settings
+                        </div>
+                    </div>
+                               
+
+                    <!-- TECHNICAL -->
+                    <!--===================================================-->
+                    <h3 class="pad-all bord-btm text-thin">Technical</h3>
+
+                    <!--Question1-->
+                    <div class="text-semibold pad-hor text-lg">
+                            <button type="button" class="btn btn-link px-0" (click)="isCollapsed[3] = !isCollapsed[3]" > <i class="fa fa-bullhorn"></i>  Can the reports be sent to me via email?</button>
+                            <p class="media-heading"> <small>  Added by Imen HAKEM <i class="fa fa-clock-o"></i>    Today 2:40 pm - 24.03.2019</small> </p>
+                    </div>
+                    <div class="panel panel-trans pad-top " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed[3]">
+                        <div class="pad-all">
+                                Weekly auto-generated emails are sent to the users showing their savings summary. You can also request a detailed savings report if required
+                        </div>
+                    </div>
+
+                    <!--Question2-->
+                    <div class="text-semibold pad-hor text-lg">
+                            <button type="button" class="btn btn-link px-0" (click)="isCollapsed[4]= !isCollapsed[4]" > <i class="fa fa-bullhorn"></i>  I need to provide access to some IT Agents in my organization to view our organizations reports. How do I do that?</button>
+                            <p class="media-heading"> <small>  Added by Imen HAKEM <i class="fa fa-clock-o"></i>    Today 2:40 pm - 24.03.2019</small> </p>
+                    </div>
+                    <div class="panel panel-trans pad-top " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed[4]">
+                        <div class="pad-all">
+                                You can add IT Agent by using the Add User option on the IT Actors Dashboard page. 
+                        </div>
+                    </div>
+
+                    <!--Question3-->
+                    <div class="text-semibold pad-hor text-lg">
+                            <button type="button" class="btn btn-link px-0" (click)="isCollapsed[5] = !isCollapsed[5]" > <i class="fa fa-bullhorn"></i>  What kind of data is collected for the dashboard reports?</button>
+                            <p class="media-heading"> <small>  Added by Imen HAKEM <i class="fa fa-clock-o"></i>    Today 2:40 pm - 24.03.2019</small> </p>
+                    </div>
+                    <div class="panel panel-trans pad-top " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed[5]">
+                        <div class="pad-all">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                     <h4 class="text-thin "><i class="fa fa-lightbulb-o fa-lg fa-fw text-warning"></i> Useful tips</h4>
+                </div>
+                <div class="card-body">
+                    <div class="list-group bg-trans ">
+                        <a class="list-group-item" href="#"><span class="badge badge-purple badge-icon badge-fw pull-left"></span> Get Started with Leaflet Map</a>
+                        <a class="list-group-item" href="#"><span class="badge badge-info badge-icon badge-fw pull-left"></span> Data Visualisation</a>
+                        <a class="list-group-item" href="#"><span class="badge badge-pink badge-icon badge-fw pull-left"></span> Learn more about sensors</a>
+                        <a class="list-group-item" href="#"><span class="badge badge-success badge-icon badge-fw pull-left"></span> First Aid</a>
+                    </div>
+                     <hr>
+                     <h5 class="text-thin"><i class="fa fa-question-circle fa-lg fa-fw text-primary"></i> Can't find the answer? </h5>
+                    <p>Feel free to contact us for any issues you might have with our products.</p>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" class="form-control" placeholder="youremail@domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="email" class="form-control" placeholder="Message subject">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-success pull-right"><span class="fa fa-send"></span> Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="animated fadeIn">
+  <div class="card-columns cols-2">
+    <div class="card text-white bg-dark">
+      <div class="card-header">
+        ALERTS SOURCE
+        <div class="card-header-actions">
+          <a href="http://www.chartjs.org">
+            <small class="text-muted">docs</small>
+          </a>
+        </div>
+      </div>
+      <div class="card-body  ">
+        <div class="chart-wrapper">
+          <canvas baseChart class="chart"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColours"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="card text-white bg-dark">
+        <div class="card-header">
+          ALERTS STATE
+          <div class="card-header-actions">
+            <a href="http://www.chartjs.org">
+              <small class="text-muted">docs</small>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart"
+            [datasets]="lineChartData2"
+            [labels]="lineChartLabels2"
+            [options]="lineChartOptions2"
+            [colors]="lineChartColours2"
+            [legend]="lineChartLegend2"
+            [chartType]="lineChartType2"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    
+      <div class="card text-white bg-dark">
+        <div class="card-header">
+          SENSOR TYPE ALERTS
+          <div class="card-header-actions">
+            <a href="http://www.chartjs.org">
+              <small class="text-muted">docs</small>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart"
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+   
+    
+    
+  
+    <div class="card text-white  bg-dark ">
+      <div class="card-header">
+        CITIZEN TYPE ALERTS
+        <div class="card-header-actions">
+          <a href="http://www.chartjs.org">
+            <small class="text-muted">docs</small>
+          </a>
+        </div>
+      </div>
+      <div class="card-body text-white ">
+        <div class="chart-wrapper">
+          <canvas baseChart class="chart"
+          [data]="polarAreaChartData"
+          [labels]="polarAreaChartLabels"
+          [legend]="polarAreaLegend"
+          [chartType]="polarAreaChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+
+    
+</div>

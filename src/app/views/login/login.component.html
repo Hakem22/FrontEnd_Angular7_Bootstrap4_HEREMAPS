@@ -1,0 +1,38 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4 mx-auto">
+
+                <form #f="ngForm" (ngSubmit)="checkLogin(f.value)">
+                    <h4 class="text-center">Welcome to</h4>
+
+                  <div class="text-center"><img src="../../../assets/img/brand/logo (2).png"></div>
+                  <h2 class="text-center">Scope Dashborad</h2>
+
+                  <p class="text-muted text-center">Sign In to your account</p>
+                  <div class="form-group">
+                    <span class="input-group-text"><i class="fa fa-user">    Username </i></span>
+                    <input type="text" class="form-control" name="username"  required ngModel >
+                </div>
+        
+                <div class="form-group">
+                    <span class="input-group-text"><i class="icon-lock">    Password </i></span>
+                    <input type="password" class="form-control" id="password" name="password" required ngModel >
+                </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-block btn-outline-dark  px-4" >Login</button>
+                    </div>
+                    <div class="col-6 text-right">
+                      <button type="button" class="btn btn-block btn-outline-secondary px-0" [routerLink]="['/passwordforgot']">Forgot password?</button>
+                    </div>
+                  </div>         
+                </form>
+                         
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>

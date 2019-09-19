@@ -1,0 +1,50 @@
+<div id="page-content" *ngIf="isAuthenticated()">
+    <div class="row">
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-header">
+                <h4 class="text-thin "><i class="fa fa-user-circle-o  fa-lg fa-fw text-info"></i> Personal Profile</h4>
+            </div>
+            <div class="card-body">
+              <div class="text-center">
+                <h3>Imen22</h3>
+              </div>
+              <h5><i class="fa fa-user-o px-0"></i>  Imen Hakem</h5>
+              <h5><i class="fa fa-phone px-0"></i>  048979796</h5>
+              <h5><i class="fa fa-envelope px-0"></i>  akaj@buu.vom</h5>
+
+              <div class="text-semibold pad-hor textc-sm">
+                <button type="button" class="btn btn-dark btn-sm btn-block" (click)="isCollapsed = !isCollapsed" >Change Password</button>
+              </div>
+              <div class="card-footer " (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed">   
+                      <div class="input-group mb-3">
+                          <input type="Password" class="form-control" placeholder="Current Password">
+                      </div> 
+                      <div class="input-group mb-3">
+                          <input type="password" class="form-control" placeholder="New Password" >
+                      </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-9">
+          <div class="card">
+            <div class="card-header">
+                <h4 class="text-thin "><i class="fa fa-history fa-lg fa-fw text-danger"></i> Profile History</h4>
+            </div>
+            <div class= "card-body">
+              <p><i class="fa fa-clock-o px-0"></i> Last time connection was at: 2:40 pm - 24.03.2019</p>
+              <div class="card-body">
+                <small><em>Interventions Completed</em></small>
+                <progressbar class="progress progress-success" [value]="100" [max]="100" type="success"><b></b></progressbar>
+          
+                <small><em>Intervenntions in Progress</em></small>
+                <progressbar class="progress-bar progress-bar-striped progress-bar-animated" [value]="70" [max]="max" [type]="warning">
+                </progressbar>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>

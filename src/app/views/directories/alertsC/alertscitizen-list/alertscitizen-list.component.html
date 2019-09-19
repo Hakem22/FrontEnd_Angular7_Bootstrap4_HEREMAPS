@@ -1,0 +1,212 @@
+<div >
+  <div class="card">
+  <div class="card-header">
+      <h3 class= "text-center font-weight-bold text-uppercase py-4">PHONE REPORTED ALERT</h3>
+  </div>
+  <div class="card-body">
+    <div class=" col-md-12">
+        <div class=" float-right col-md-6 ">
+            <form #ff="ngForm" (ngSubmit)="addnewAlertC(ff.value)">
+                        <div class="form-group  col-md-12">
+                            <select class="form-control"  id="alertType" name="alertType"  required ngModel>
+                                <option value="" disabled selected hidden>TYPE</option>
+                               <option>FIRE</option>
+                               <option>FLOOD</option>
+                              <option>EARTHEQUAKE</option>
+                                 <option>ACCIDENT</option>
+                                  <option>AGGRESSION</option>
+                              </select>
+                        </div>
+                        <div class="form-group  col-md-12">
+                            <textarea type="text"  rows="1" class="form-control" id="description" name="description" placeholder="DESCRIPTION" required ngModel ></textarea>
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <input type="number"   class="form-control" id="altitude" name="altitude" placeholder="ALTITUDE" required ngModel >
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <input type="number"   class="form-control" id="longitude" name="longitude" placeholder="LONGITUDE" required ngModel >
+                        </div>
+                        <div class="form-group   col-md-12">
+                            <button class="btn btn-danger btn-md" type="submit" ng-disabled="!citizencreated" >LAUNCH THE ALERT</button>              
+                    </div>
+            </form>  
+          </div>
+      <div class=" float-right col-md-6 ">
+      <form #f="ngForm" (ngSubmit)="AddnewCitizen(f.value)">
+                  <div class="form-group  col-md-12">
+                      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="PHONE" required ngModel >
+                  </div>
+                  <div class="form-group  col-md-12">
+                      <input type="text" class="form-control" id="fastName" name="fastName" placeholder="LASTNAME" required ngModel >
+                  </div>
+                  <div class="form-group   col-md-12">
+                          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="FIRSTNAME" required ngModel >
+                       </div>
+                  <div class="form-group  col-md-12">
+                      <button class="btn btn-info btn-md" type="submit"  >VALID CITIZEN'S INFORMATION</button>              
+              </div>
+      </form>  
+    </div>
+      </div>
+  </div>
+</div>
+
+  <div class="card">
+      <div class="card-header">
+              <h3 class= "text-center font-weight-bold text-uppercase py-4">REGISTRED ALERTS</h3>
+              <div #map style="width: 1900px; height: 200px"></div>
+      </div>
+      <div class="card-body">
+              <div class="col-md-12 ">
+              <div class="md-form  float-right col-md-4">
+                <select class="form-control"  id="type" name="type"  (change)=" AlertsByType($event)">
+                    <option>FROM CITIZEN (ALL TYPES)</option>
+                    <option>FIRE</option>
+                    <option>FLOOD</option>
+                    <option>EARTHEQUAKE</option>
+                    <option>ACCIDENT</option>
+                    <option>AGGRESSION</option>
+                    
+                </select>
+              </div>
+              <div class="md-form  float-right col-md-4">
+                <select class="form-control"  id="source" name="source" (change)="AlertsByType($event)">
+                  <option>FROM SENSOR (ALL SOURCES)</option>
+                  <option>WATER_LEVEL</option>
+                  <option>FOREST_FIRE</option>
+                </select>
+              </div>
+              <div class="md-form  float-right col-md-4">
+                  <select class="form-control"  id="state" name="state"  (change)="AlertsByState($event)">
+                    <option>ALL STATES</option>
+                    <option>VALID</option>
+                    <option>INVALID</option>
+                  </select>
+                </div>
+            </div>
+          </div>
+  </div>
+
+
+
+  <div class="row">
+      <div class="col-sm-12">
+              <!--Citizen Alert-->
+              <div class="col-sm-6 float-right">
+                      <h3 class= "text-center font-weight-bold text-uppercase py-4">CITIZENS ALERTS</h3>
+                      <div *ngFor="let alert of alertC, let id=index">
+                      <div  class="card float-right col-sm-12" style="margin-bottom: 10px" >
+                          <div class="card-header">
+                            <h5 class= "text-center font-weight-bold text-uppercase">{{alert.alertType}}</h5>
+                          </div>    
+
+                          <div class="card-body">
+                          <dl class="row col-sm-12">
+                              <!--phone-->
+                              <dt class="col-sm-1"><i class="fa fa-mobile"></i></dt>
+                              <dd class="col-sm-3">{{alert.citizen.phoneNumber}}</dd>
+                              <!--name-->
+                              <dt class="col-sm-1"><i class="fa fa-user"></i></dt>
+                              <dd class="col-sm-3"><p class="text-uppercase">{{alert.citizen.fastName}} {{alert.citizen.firstName}}</p></dd>
+
+                              <!--button get alerts-->
+                              <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                              <dd class="col-sm-3"> {{alert.altitude}} {{alert.longitude}}</dd>
+
+                              <!--time-->
+                              <dt class="col-sm-1"><i class="fa fa-clock-o"></i></dt>
+                              <dd class="col-sm-3"><p>{{alert.timeSend}}</p></dd>
+                              <!--date-->
+                              <dt class="col-sm-1"><i class="fa fa-calendar"></i></dt>
+                              <dd class="col-sm-3"><p>{{alert.dateSend}}</p></dd>
+
+                              <!--button see on map-->
+                              <dt class="col-sm-4">        
+                                    <button class="btn btn-success float-right" (click)=" seeOnMap(alert.altitude,alert.longitude)">ON MAP</button>
+                              </dt>
+
+                              <!--Description-->
+                              <dt class="col-sm-1"><i class="fa fa-newspaper-o"></i></dt>
+                              <dd class="col-sm-7"><p>"{{alert.description}}"</p></dd>
+
+                              <!--button get delete-->
+                              <dt class="col-sm-4">         
+                              </dt>
+      
+                              <!--actor-->
+                              <dt class="col-sm-3" >
+                                <span x class="badge badge-secondary">{{alert.alertState}}</span>
+                                </dt>
+                              <dd class="col-sm-6"><p class="text-uppercase">Traited  By: {{alert.acteur.lastName}} {{ alert.acteur.firstName}}</p></dd>      
+                              
+                            </dl>
+                            <dl class="row col-sm-12">
+                              <button class="btn btn-dark mx-auto" (click)="isCollapsed = !isCollapsed">MEDIA</button>
+                            </dl>
+                          <dl class="row col-sm-12" (collapsed)="collapsed($event)"(expanded)="expanded($event)"[collapse]="!isCollapsed">   
+                                <div class="row"><img [src]="alert.uri" class="img-thumbnail" alt="Responsive image"></div>      
+                        </dl>
+                          
+                          </div>  
+                      </div>
+                    </div>
+                 </div> 
+                 
+     
+                 
+                 <div class="col-sm-6 float-right"> 
+                    <h3 class= "text-center font-weight-bold text-uppercase py-4">SENSORS ALERTS</h3>
+                    <div *ngFor="let alert of alertS, let id=index">
+                      <div  class="card float-right col-sm-12" style="margin-bottom: 10px" >
+                        <div class="card-header">
+                            <h5 class= "text-center font-weight-bold text-uppercase">{{alert.sensor.type}}</h5>
+                        </div>    
+
+                        <div class="card-body">
+                          <dl class="row col-sm-12">
+                            <!--phone-->
+                            <dt class="col-sm-1"><i class="fa fa-rss"></i></dt>
+                            <dd class="col-sm-3">{{alert.sensor.reference}}</dd>
+                            <!--name-->
+                            <dt class="col-sm-1"><i class="fa fa-battery-3"></i></dt>
+                            <dd class="col-sm-3"><p class="text-uppercase">{{alert.sensor.state}}</p></dd>
+
+                            <!--button get alerts-->
+                            <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+                            <dd class="col-sm-3"> {{alert.sensor.altitude}} {{alert.sensor.longitude}}</dd>
+
+                            <!--time-->
+                            <dt class="col-sm-1"><i class="fa fa-clock-o"></i></dt>
+                            <dd class="col-sm-3"><p>{{alert.timeSend}}</p></dd>
+                            <!--date-->
+                            <dt class="col-sm-1"><i class="fa fa-calendar"></i></dt>
+                            <dd class="col-sm-3"><p>{{alert.dateSend}}</p></dd>
+
+                            <!--button see on map-->
+                            <dt class="col-sm-4">        
+                                  <button class="btn btn-success float-right" (click)=" seeOnMap(alert.altitude,alert.longitude)">ON MAP</button>
+                            </dt>
+
+                            <!--Description-->
+                            <dt class="col-sm-1"><i class="fa fa-bar-chart"></i></dt>
+                            <dd class="col-sm-7"><p class="font-weight-bold">"{{alert.value}}"</p></dd>
+
+                            <!--button get delete-->
+                            <dt class="col-sm-4">         
+                                <button class="btn btn-danger float-right" (click)=" deleteAlert(alert.id)">REMOVE</button>
+                            </dt>
+                        
+                            <!--actor-->
+                            <dt class="col-sm-3" >
+                              <span x class="badge badge-secondary">{{alert.alertState}}</span>
+                              </dt>
+                            <dd class="col-sm-6"><p class="text-uppercase">Traited  By: {{alert.acteur.lastName}} {{ alert.acteur.firstName}}</p></dd>      
+                            
+        </dl>
+      </div>      
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>

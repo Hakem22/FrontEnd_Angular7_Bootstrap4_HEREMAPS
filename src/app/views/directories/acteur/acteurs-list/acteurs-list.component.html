@@ -1,0 +1,89 @@
+<div >
+
+    <div class="card-header">
+        <div class="col-md-12 ">
+        <form #f="ngForm" (ngSubmit)="addNewActeur(f.value)">
+                    <div class="form-group float-right col-md-4">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="PHONE" required ngModel >
+                    </div>
+                    <div class="form-group  float-right col-md-4"></div>
+                    <div class="form-group  float-right col-md-4">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="USERNAME" required ngModel >
+                    </div>
+                    <div class="form-group  table-add float-right col-md-4">
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="FIRSTNAME" required ngModel >
+                         </div>
+                         <div class="form-group  float-right col-md-4"></div>
+                    <div class="form-group  float-right col-md-4">
+                        <input type="text" class="form-control" id="password" name="password" placeholder="PASSWORD" required ngModel >
+                    </div>
+                    <div class="form-group float-right col-md-4">
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="LASTNAME" required ngModel >
+                    </div>
+                    <div class="form-group  float-right col-md-4"></div>
+                    <div class="form-group  table-add float-right col-md-4">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="EMAIL" required ngModel >
+                    </div>
+                     <div class="form-group table-add  mx-auto col-md-4">
+                        <select class="form-control"  id="role" name="role" required ngModel>
+                            <option value="" disabled selected hidden>STATE</option>
+                            <option>ADMIN</option>
+                            <option>MANAGER</option>
+                      </select>
+                    </div>
+                    <div class="form-group mx-auto  col-md-2">
+                        <button class="btn btn-info btn-md" type="submit"  >ADD NEW ACTOR</button>              
+                </div>
+            
+        </form>  
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+                <h3 class= "text-center font-weight-bold text-uppercase py-4">REGISTRED ACTORS</h3>
+        </div>
+        <div class="card-body">
+                <div class="col-md-12 ">
+                   
+                <div class="md-form  float-right col-md-12">
+                  <select class="form-control"  id="type" name="type" placeholder="Type" (change)="DisplayBySelected($event)">
+                    <option>ALL TYPE</option>
+                    <option>ADMIN</option>
+                    <option>MANAGER</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+    
+        <div *ngFor="let actor of acteurs; let id = index">
+            <div class="col-md-4 float-right">
+                <div class="card bg-dark">
+                    <div class="card-header">
+                        <h5 class= "text-center font-weight-bold text-uppercase">{{actor.firstName}} {{actor.lastName}}</h5>
+                    </div>
+
+                    <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3"><i class="fa fa-phone"></i></dt>
+                                <dd class="col-sm-9">{{actor.phone}}</dd>
+                          
+                                <dt class="col-sm-3"><i class="fa fa-envelope"></i></dt>
+                                <dd class="col-sm-9"><p>{{actor.email}}</p></dd>
+                            </dl>
+                            <button class="btn btn-danger btn-md  col-md-5 float-right" (click)="deleteActeur(actor.id)">REMOVE</button>
+                            <button class="btn btn-secondary btn-md col-md-5 " [routerLink]="['/directories/getthisactoralerts', actor.id]">GET ALERTS</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            
+
+
+    
+    
+</div>

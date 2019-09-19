@@ -1,0 +1,64 @@
+<!-- Editable table -->
+<div class="card">
+    <div class="card-header">
+      <h3 class= "text-center font-weight-bold text-uppercase py-4">REGISTRED CITIZENS</h3>
+      
+          <div class="col-md-12 ">
+              <div class="row">
+          <div class="md-form  col-md-6">
+            <select class="form-control"  id="type" name="type" placeholder="Type" (change)="CitizensByAlertType($event)">
+              <option>ALL TYPES</option>
+              <option>FIRE</option>
+              <option>FLOOD</option>
+              <option>EARTHEQUAKE</option>
+              <option>ACCIDENT</option>
+              <option>AGGRESSION</option>
+            </select>
+          </div>
+          <div class="md-form col-md-6">
+            <select class="form-control"  id="state" name="state"  (change)="CitizensByAlertState($event)">
+              <option>ALL STATES</option>
+              <option>VALID</option>
+              <option>INVALID</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <table mdbTable class=" table table-responsive-md text-center" hover="true" small="true" >
+          <thead class="black white-text">
+          <tr >
+              <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" [mdbTableSort]="elements" [sortBy]="headElements[i]">{{head | titlecase}} 
+                  <i  class=""></i>    
+              </th>       
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol  *ngFor="let citizen of citizens; let id = index">
+              <td>
+                  <span ><i class="fa fa-user"></i></span>
+                </td>
+            <td>
+              <span>{{citizen.fastName}}</span>
+            </td>
+  
+            <td>
+              <span>{{citizen.firstName}}</span>
+            </td>
+            <td>
+              <span>{{citizen.phoneNumber}}</span>
+            </td>
+            <td>
+                <span class="table-remove">
+                  <button type="button" mdbBtn color="secondary" rounded="true" size="sm" rounded="true" class="my-0" [routerLink]="['/directories/getthiscitizenalerts', citizen.id]">GET</button>
+                </span>
+              </td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Editable table -->

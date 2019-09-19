@@ -1,0 +1,90 @@
+<!-- Editable table -->
+<div class="card">
+    <div class="card-header">
+      <h3 class= "text-center font-weight-bold text-uppercase py-4">REGISTRED INTERVENTION UNITS</h3>
+      
+          <div class="col-md-12 ">
+              <div class="row">
+            <select class="form-control"  id="state" name="state"  (change)="UnitsByType($event)">
+            <option >ALL INTERVENTION TYPE</option>
+            <option>HOSPITALITY</option>
+            <option>CIVIL_PROTECTION</option>
+            <option>POLICE_DIRECTION</option>
+            <option>GENDARMERIE</option>
+            </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        
+        <form #f="ngForm" (ngSubmit)="addNewUnit(f.value)">
+
+        <div class="form-group table-add float-right mb-3 mr-2">
+          <input type="text" class="form-control" id="address" name="address" placeholder="ADDRESS" required ngModel >
+        </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+        <select class="form-control"  id="interventionType" name="interventionType"  required ngModel>
+            <option value="" disabled selected hidden>TYPE</option>
+            <option>HOSPITALITY</option>
+            <option>CIVIL_PROTECTION</option>
+            <option>POLICE_DIRECTION</option>
+            <option>GENDARMERIE</option>
+          </select>
+        </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+            <input type="number" class="form-control" id="longitude" name="longitude" placeholder="LONGITUDE" required ngModel >
+        </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+            <input type="number" class="form-control" id="altitude" name="altitude" placeholder="ALTITUDE" required ngModel >
+        </div>
+        <span class="table-add float-right mb-3 mr-2">
+            <button class="btn btn-info btn-md" type="submit"  >ADD NEW INTERVENTION UNIT</button>          
+          </span>
+      </form>
+        <table mdbTable class=" table table-responsive-md text-center" hover="true" small="true" >
+          <thead class="black white-text">
+          <tr >
+              <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" [mdbTableSort]="elements" [sortBy]="headElements[i]">{{head | titlecase}} 
+                  <i  class=""></i>    
+              </th>       
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol  *ngFor="let unit of units; let id = index">
+            <td *ngIf="unit.interventionType == 'HOSPITALITY'">
+                <span><i class="fa fa-ambulance"></i></span>
+            </td>
+            <td *ngIf="unit.interventionType == 'POLICE_DIRECTION'">
+                <span><i class="fa fa-cab"></i></span>
+            </td>
+             <td *ngIf="unit.interventionType == 'CIVIL_PROTECTION'">
+                <span><i class="fa fa-fire-extinguisher"></i></span>
+            </td>
+            <td *ngIf="unit.interventionType == 'GENDARMERIE'">
+                <span><i class="fa fa-bus"></i></span>
+            </td>
+            <td>
+              <span (keyup)="changeValue(unit.id, 'INTERVENTION_TYPE', $event)" (blur)="updateList(unit.id, 'interventionType', $event)" >{{unit.interventionType}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(unit.id, 'ALTITUDE', $event)" (blur)="updateList(unit.id, 'altitude', $event) ">{{unit.altitude}}</span>
+            </td>
+            <td> 
+              <span contenteditable="true" (keyup)="changeValue(unit.id, 'LONGITUDE', $event)" (blur)="updateList(unit.id, 'longitude', $event)">{{unit.longitude}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(unit.id, 'ADDRESS', $event)" (blur)="updateList(unit.id, 'address', $event)">{{unit.address}}</span>
+            </td>
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="danger" rounded="true" size="sm" rounded="true" class="my-0" (click)="deleteUnit(unit.id,unit.interventionType)">REMOVE</button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Editable table -->

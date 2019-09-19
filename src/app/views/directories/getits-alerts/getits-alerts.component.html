@@ -1,0 +1,55 @@
+<div class="card" >
+    <div class="card-header">
+            <h3 class= "text-center font-weight-bold text-uppercase py-4">Selected Sensor Alerts</h3>
+            <div #map style="width: 1600px; height: 200px"></div>
+     </div>
+</div>           
+<div *ngFor="let alert of alerts, let id=index" >
+    <div  class="card float-left col-sm-6" style="margin-bottom: 10px" >
+      <div class="card-header">
+          <h5 class= "text-center font-weight-bold text-uppercase">{{alert.sensor.type}}</h5>
+      </div>    
+
+      <div class="card-body">
+        <dl class="row col-sm-12">
+          <!--phone-->
+          <dt class="col-sm-1"><i class="fa fa-rss"></i></dt>
+          <dd class="col-sm-3">{{alert.sensor.reference}}</dd>
+          <!--name-->
+          <dt class="col-sm-1"><i class="fa fa-battery-3"></i></dt>
+          <dd class="col-sm-3"><p class="text-uppercase">{{alert.sensor.state}}</p></dd>
+
+          <!--button get alerts-->
+          <dt class="col-sm-1"><i class="fa fa-map-marker"></i></dt>
+          <dd class="col-sm-3"> {{alert.sensor.altitude}} {{alert.sensor.longitude}}</dd>
+
+          <!--time-->
+          <dt class="col-sm-1"><i class="fa fa-clock-o"></i></dt>
+          <dd class="col-sm-3"><p>{{alert.timeSend}}</p></dd>
+          <!--date-->
+          <dt class="col-sm-1"><i class="fa fa-calendar"></i></dt>
+          <dd class="col-sm-3"><p>{{alert.dateSend}}</p></dd>
+
+          <!--button see on map-->
+          <dt class="col-sm-4">        
+                <button class="btn btn-success float-right" (click)=" seeOnMap(alert.altitude,alert.longitude)">ON MAP</button>
+          </dt>
+
+          <!--Description-->
+          <dt class="col-sm-1"><i class="fa fa-bar-chart"></i></dt>
+          <dd class="col-sm-7"><p class="font-weight-bold">"{{alert.value}}"</p></dd>
+
+          <!--button get delete-->
+          <dt class="col-sm-4">         
+          </dt>
+      
+          <!--actor-->
+          <dt class="col-sm-3" >
+            <span x class="badge badge-secondary">{{alert.alertState}}</span>
+            </dt>
+          <dd class="col-sm-6"><p class="text-uppercase">Traited  By: {{alert.acteur.lastName}} {{ alert.acteur.firstName}}</p></dd>      
+          
+        </dl>
+      </div>      
+    </div>
+  </div>

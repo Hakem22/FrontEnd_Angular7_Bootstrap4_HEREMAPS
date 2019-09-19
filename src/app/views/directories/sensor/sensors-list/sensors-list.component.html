@@ -1,0 +1,113 @@
+<!-- Editable table -->
+<div class="card" >
+    <div class="card-header">
+      <h3 class= "text-center font-weight-bold text-uppercase py-4">REGISTRED SENSORS</h3>
+      
+          <div class="col-md-12 ">
+              <div class="row">
+          <div class="md-form  col-md-6">
+            <select class="form-control"  id="type" name="type" placeholder="Type" (change)="SensorsByType($event)">
+              <option>ALL TYPE</option>
+              <option>WATER_LEVEL</option>
+              <option>FOREST_FIRE</option>
+            </select>
+          </div>
+          <div class="md-form col-md-6">
+            <select class="form-control"  id="state" name="state"  (change)="SensorsByStatus($event)">
+              <option>ALL STATES</option>
+              <option>ACTIVE</option>
+              <option>DISABLED</option>
+              <option>SUSPEND</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        
+        <form #f="ngForm" (ngSubmit)="addNewSensor(f.value)">
+
+        <div class="form-group table-add float-right mb-3 mr-2">
+          <input type="text" class="form-control" id="reference" name="reference" placeholder="REFERENCE" required ngModel >
+        </div>
+        <div class="form-group table-add float-right mx-auto">
+        <select class="form-control"  id="state" name="state"  required ngModel>
+            <option value="" disabled selected hidden>STATE</option>
+            <option>ACTIVE</option>
+            <option>DISABLED</option>
+            <option>SUSPEND</option>
+          </select>
+        </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+            <select class="form-control"  id="type" name="type"  required ngModel>
+                <option value="" disabled selected hidden>TYPE</option>
+                <option>WATER_LEVEL</option>
+                <option>FOREST_FIRE</option>
+              </select>
+            </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+            <input type="number" class="form-control" id="longitude" name="longitude" placeholder="LONGITUDE" required ngModel >
+        </div>
+        <div class="form-group table-add float-right mb-3 mr-2">
+            <input type="number" class="form-control" id="altitude" name="altitude" placeholder="ALTITUDE" required ngModel >
+        </div>
+        <span class="table-add float-right mb-3 mr-2">
+            <button class="btn btn-info btn-md" type="submit"  >ADD NEW SENSOR</button>          
+          </span>
+      </form>
+        <table mdbTable class=" table table-responsive-md text-center" hover="true" small="true" >
+          <thead class="black white-text">
+          <tr >
+              <th *ngFor="let head of headElements; let i = index" aria-controls="tableSortExample" scope="col" [mdbTableSort]="elements" [sortBy]="headElements[i]">{{head | titlecase}} 
+                  <i  class=""></i>    
+              </th>       
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol  *ngFor="let sensor of sensors; let id = index">
+            <td>
+              <span (keyup)="changeValue(id, 'REFERENCE', $event)" (blur)="updateList(sensor.id, 'reference', $event)" contenteditable="true">{{sensor.reference}}</span>
+            </td>
+            <td *ngIf="sensor.state == 'ACTIVE'">
+              <span contenteditable="true" (keyup)="changeValue(id, 'STATE', $event)" (blur)="updateList(id, 'age', $event) " class="badge badge-success">{{sensor.state}}</span>
+            </td>
+            <td *ngIf="sensor.state == 'DISABLED'">
+                <span contenteditable="true" (keyup)="changeValue(id, 'STATE', $event)" (blur)="updateList(id, 'age', $event)" class="badge badge-danger">{{sensor.state}}</span>
+            </td>
+            <td *ngIf="sensor.state == 'SUSPEND'">
+                <span contenteditable="true" (keyup)="changeValue(id, 'STATE', $event)" (blur)="updateList(id, 'age', $event)" class="badge badge-secondary">{{sensor.state}}</span>
+              </td>
+            <td> 
+              <span>{{sensor.type}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'ALTITUDE', $event)" (blur)="updateList(sensor.id, 'altitude', $event)">{{sensor.altitude}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'LONGITUDE', $event)" (blur)="updateList(sensor.id, 'longitude', $event)">{{sensor.longitude}}</span>
+            </td>
+            <td>
+                <span class="table-remove">
+                  <button type="button" mdbBtn color="danger" rounded="true" size="sm" rounded="true" class="my-0" (click)="changeStateD(sensor.id)"></button>
+                  <button type="button" mdbBtn color="success" rounded="true" size="sm" rounded="true" class="my-0" (click)="changeStateA(sensor.id)"></button>
+                  <button type="button" mdbBtn color="secondary" rounded="true" size="sm" rounded="true" class="my-0" (click)="changeStateS(sensor.id)"></button>
+                </span>
+            </td>
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="primary" rounded="true" size="sm" rounded="true" class="my-0" (click)="RemoveSensor(sensor.id)">REMOVE</button>
+              </span>
+            </td>
+            <td>
+                <span class="table-remove">
+                  <button type="button" mdbBtn color="secondary" rounded="true" size="sm" rounded="true" class="my-0" [routerLink]="['/directories/getthissensoralerts', sensor.id]">GET</button>
+                </span>
+              </td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Editable table -->
